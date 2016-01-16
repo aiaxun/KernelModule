@@ -17,7 +17,7 @@ int init_task_vmas(struct task_struct *task)
     int end_code = mm->end_code;
     struct vm_area_struct *first = get_first_vma(mmap);
     unsigned int personality = task->personality;
-    down_write(&mm->mmap_sem);
+    //down_write(&mm->mmap_sem);
     while (first) {
         if (is_code_page(first,start_code,end_code)!=1) {
             continue;
@@ -26,7 +26,7 @@ int init_task_vmas(struct task_struct *task)
         set_vma_non_exec(first,personality);
         first = first->vm_next;
     }
-    up_write(&mm->mmap_sem);
+    //up_write(&mm->mmap_sem);
     return 0;
 }
 
@@ -39,7 +39,7 @@ int set_vma_exec(struct vm_area_struct *vma,unsigned int personality)
     if (flags & VM_EXEC) {
         flags &= (!VM_EXEC);
     }
-    vma->vm_flags = flags;
+    //vma->vm_flags = flags;
     printk("set exec at code %p->%p\n",vma->vm_start,vma->vm_end);
     return 0;
 }
@@ -50,7 +50,7 @@ int set_vma_non_exec(struct vm_area_struct *vma, unsigned int personality)
     if (!(flags & VM_EXEC)) {
         flags |= VM_EXEC;
     }
-    vma->vm_flags = flags;
+    //vma->vm_flags = flags;
     printk("set non-exec at %p->%p\n",vma->vm_start,vma->vm_end);
     return 0;
 }

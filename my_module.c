@@ -8,9 +8,10 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/sched.h>
+#include <linux/kernel.h>
 #include "slide.h"
 
-MODULE_LICENSE("GPL");
+MODULE_LICENSE("Dual BSD/GPL");
 MODULE_AUTHOR("sqt");
 MODULE_VERSION("1.0");
 static int __init my_init(void)

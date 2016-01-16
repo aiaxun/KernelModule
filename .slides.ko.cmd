@@ -1,0 +1,1 @@
+cmd_/home/sqt/modules/KernelModule/slides.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/sqt/modules/KernelModule/slides.ko /home/sqt/modules/KernelModule/slides.o /home/sqt/modules/KernelModule/slides.mod.o

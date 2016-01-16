@@ -16,15 +16,18 @@ MODULE_AUTHOR("sqt");
 MODULE_VERSION("1.0");
 static int __init my_init(void)
 {
-    struct task_struct *task,*p;
+    static struct task_struct *task;
+    struct task_struct *p;
     printk("Module initing\n");
+    
     for_each_process(p) {
-        if (strcmp(p->comm,"test")==0) {
+        if (strcmp(p->comm,"nginx")==0) {
             task = p;
             break;
         }
     }
-    init_task_vmas(task);
+    
+    if (task ) init_task_vma(task);
 
     return 0;
 }

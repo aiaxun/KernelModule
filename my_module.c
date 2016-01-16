@@ -13,7 +13,7 @@
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("sqt");
 MODULE_VERSION("1.0");
-static int __init my_init(void)
+static int my_init(void)
 {
     struct task_struct *task,*p;
     printk("Module initing\n");
@@ -28,7 +28,7 @@ static int __init my_init(void)
     return 0;
 }
 
-static int __exit my_exit(void) 
+static int  my_exit(void) 
 {
     printk("Module exiting \n");
     

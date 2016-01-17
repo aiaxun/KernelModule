@@ -38,12 +38,10 @@ int init_task_vma(struct task_struct *task)
     int start_data = task->mm->start_data;
     int end_data = task->mm->end_data;
     int start_brk = task->mm->start_brk;
-    //int brk = task->mm->brk;
+    int brk = task->mm->brk;
     int start_stack = task->mm->start_stack;
     int i;
-    unsigned long  vm_start,vm_end, vm_flags, prot;
-
-    printk("code start addr: 0x%lu\t,end addr: 0x%lu\n",start_code,end_code);
+    printk("code start addr: 0x%lx\t,end addr: 0x%lx\n",start_code,end_code);
     static struct vm_area_struct *vma;
     static struct vm_area_struct *p;
     struct vm_area_struct *q;
@@ -51,13 +49,13 @@ int init_task_vma(struct task_struct *task)
     p = vma;
     for (i=0;i<VMACACHE_SIZE;i++) {
         q = task->vmacache[i];
-        printk("task caching 0x%lu->0x%lu\n",q->vm_start,q->vm_end);
+        printk("current caching 0x%lx->0x%lx\n",q->vm_start,q->vm_end);
     }
     while (p->vm_prev) {
         p = p->vm_prev;
     }
     while (p->vm_next) {
-        printk("vm_start:0x%lu, vm_end:0x%lu\t",p->vm_start,p->vm_end);
+        printk("vm_start:0x%lx, vm_end:0x%lx\t",p->vm_start,p->vm_end);
         if (p->vm_flags & VM_READ) {
             printk("R");
         } else {
@@ -68,11 +66,6 @@ int init_task_vma(struct task_struct *task)
         } else { printk("-"); }
         if (p->vm_flags & VM_EXEC) {
             printk("X");
-            vm_start = p->vm_start;
-            vm_end = p->vm_end;
-            vm_flags = p->vm_flags;
-            vm_flags &= !(VM_EXEC);
-            changeProt(vm_start, vm_end-vm_start,vm_flags,task);
         } else{ printk("-"); }
         printk("\t");
         if (p->vm_end < end_code && p->vm_start >start_code ) {
@@ -87,13 +80,13 @@ int init_task_vma(struct task_struct *task)
         printk("\n");
         p = p->vm_next;
     }
-    printk("task %s total mapped vm %lu, total %lu vmas can exec\n",task->comm,task->mm->total_vm,task->mm->exec_vm);
+    printk("task %s total mapped vm %d, total %d vmas can exec\n",task->comm,task->mm->total_vm,task->mm->exec_vm);
 
     
     return 0;
 }
 
-int changeProt(unsigned long start, size_t len, unsigned long prot, struct task_struct *task)
+int changeProt(unsigned long start, size_t len, unsigned long prot)
 {
     unsigned long vm_flags, nstart, end, tmp, reqprot;
 	struct vm_area_struct *vma, *prev;
@@ -118,14 +111,14 @@ int changeProt(unsigned long start, size_t len, unsigned long prot, struct task_
 	/*
 	 * Does the application expect PROT_READ to imply PROT_EXEC:
 	 */
-	if ((prot & PROT_READ) && (task->personality & READ_IMPLIES_EXEC))
+	if ((prot & PROT_READ) && (current->personality & READ_IMPLIES_EXEC))
 		prot |= PROT_EXEC;
 
 	vm_flags = calc_vm_prot_bits(prot);
 
-	down_write(&task->mm->mmap_sem);
+	down_write(&current->mm->mmap_sem);
 
-	vma = find_vma(task->mm, start);
+	vma = find_vma(current->mm, start);
 	error = -ENOMEM;
 	if (!vma)
 		goto out;
@@ -188,7 +181,7 @@ int changeProt(unsigned long start, size_t len, unsigned long prot, struct task_
 		}
 	}
 out:
-	up_write(&task->mm->mmap_sem);
+	up_write(&current->mm->mmap_sem);
 	return error;
 }
 

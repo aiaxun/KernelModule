@@ -1,67 +1,61 @@
-[12628.609869] vm_start:0x00007f3ef4ae2000, vm_end:0x00007f3ef4ae3000	R--	heap page
-[12628.609873] vm_start:0x00007f3ef4ae3000, vm_end:0x00007f3ef4ae4000	RW-	heap page
-[12628.609877] vm_start:0x00007f3ef4ae4000, vm_end:0x00007f3ef4ae5000	RW-	heap page
-[12628.609880] vm_start:0x00007fff9dd47000, vm_end:0x00007fff9dd69000	RW-	heap page
-[12628.609884] vm_start:0x00007fff9ddc8000, vm_end:0x00007fff9ddca000	R--	heap page
-[13225.249707] Module exiting 
-[13231.061462] Module initing
-[13231.061501] code start addr: 0x0000000000400000	,end addr: 0x000000000048a2b4
-[13231.061504] current caching 0x00007f3ef3fdc000->0x00007f3ef3fde000
-[13231.061506] current caching 0x000000000069b000->0x00000000006aa000
-[13231.061508] current caching 0x00007f3ef3fde000->0x00007f3ef3fe2000
-[13231.061509] current caching 0x000000000068b000->0x000000000069b000
-[13231.061511] vm_start:0x0000000000400000, vm_end:0x000000000048b000	R-X	
-[13231.061516] vm_start:0x000000000068a000, vm_end:0x000000000068b000	R--	
-[13231.061519] vm_start:0x000000000068b000, vm_end:0x000000000069b000	RW-	
-[13231.061522] vm_start:0x000000000069b000, vm_end:0x00000000006aa000	RW-	
-[13231.061525] vm_start:0x0000000001b56000, vm_end:0x0000000001b98000	RW-	
-[13231.061529] vm_start:0x00007f3ef33dc000, vm_end:0x00007f3ef33e8000	R-X	heap page
-[13231.061533] vm_start:0x00007f3ef33e8000, vm_end:0x00007f3ef35e7000	---	heap page
-[13231.061537] vm_start:0x00007f3ef35e7000, vm_end:0x00007f3ef35e8000	R--	heap page
-[13231.061541] vm_start:0x00007f3ef35e8000, vm_end:0x00007f3ef35e9000	RW-	heap page
-[13231.061544] vm_start:0x00007f3ef35e9000, vm_end:0x00007f3ef35f4000	R-X	heap page
-[13231.061548] vm_start:0x00007f3ef35f4000, vm_end:0x00007f3ef37f3000	---	heap page
-[13231.061552] vm_start:0x00007f3ef37f3000, vm_end:0x00007f3ef37f4000	R--	heap page
-[13231.061556] vm_start:0x00007f3ef37f4000, vm_end:0x00007f3ef37f5000	RW-	heap page
-[13231.061560] vm_start:0x00007f3ef37f5000, vm_end:0x00007f3ef380c000	R-X	heap page
-[13231.061564] vm_start:0x00007f3ef380c000, vm_end:0x00007f3ef3a0b000	---	heap page
-[13231.061568] vm_start:0x00007f3ef3a0b000, vm_end:0x00007f3ef3a0c000	R--	heap page
-[13231.061572] vm_start:0x00007f3ef3a0c000, vm_end:0x00007f3ef3a0d000	RW-	heap page
-[13231.061576] vm_start:0x00007f3ef3a0d000, vm_end:0x00007f3ef3a0f000	RW-	heap page
-[13231.061579] vm_start:0x00007f3ef3a0f000, vm_end:0x00007f3ef3a17000	R-X	heap page
-[13231.061583] vm_start:0x00007f3ef3a17000, vm_end:0x00007f3ef3c16000	---	heap page
-[13231.061587] vm_start:0x00007f3ef3c16000, vm_end:0x00007f3ef3c17000	R--	heap page
-[13231.061591] vm_start:0x00007f3ef3c17000, vm_end:0x00007f3ef3c18000	RW-	heap page
-[13231.061595] vm_start:0x00007f3ef3c18000, vm_end:0x00007f3ef3dd8000	R-X	heap page
-[13231.061598] vm_start:0x00007f3ef3dd8000, vm_end:0x00007f3ef3fd8000	---	heap page
-[13231.061602] vm_start:0x00007f3ef3fd8000, vm_end:0x00007f3ef3fdc000	R--	heap page
-[13231.061606] vm_start:0x00007f3ef3fdc000, vm_end:0x00007f3ef3fde000	RW-	heap page
-[13231.061609] vm_start:0x00007f3ef3fde000, vm_end:0x00007f3ef3fe2000	RW-	heap page
-[13231.061613] vm_start:0x00007f3ef3fe2000, vm_end:0x00007f3ef3ffb000	R-X	heap page
-[13231.061617] vm_start:0x00007f3ef3ffb000, vm_end:0x00007f3ef41fa000	---	heap page
-[13231.061621] vm_start:0x00007f3ef41fa000, vm_end:0x00007f3ef41fb000	R--	heap page
-[13231.061625] vm_start:0x00007f3ef41fb000, vm_end:0x00007f3ef41fc000	RW-	heap page
-[13231.061628] vm_start:0x00007f3ef41fc000, vm_end:0x00007f3ef4268000	R-X	heap page
-[13231.061632] vm_start:0x00007f3ef4268000, vm_end:0x00007f3ef4467000	---	heap page
-[13231.061636] vm_start:0x00007f3ef4467000, vm_end:0x00007f3ef4468000	R--	heap page
-[13231.061640] vm_start:0x00007f3ef4468000, vm_end:0x00007f3ef4469000	RW-	heap page
-[13231.061644] vm_start:0x00007f3ef4469000, vm_end:0x00007f3ef4472000	R-X	heap page
-[13231.061647] vm_start:0x00007f3ef4472000, vm_end:0x00007f3ef4671000	---	heap page
-[13231.061651] vm_start:0x00007f3ef4671000, vm_end:0x00007f3ef4672000	R--	heap page
-[13231.061655] vm_start:0x00007f3ef4672000, vm_end:0x00007f3ef4673000	RW-	heap page
-[13231.061659] vm_start:0x00007f3ef4673000, vm_end:0x00007f3ef46a1000	RW-	heap page
-[13231.061662] vm_start:0x00007f3ef46a1000, vm_end:0x00007f3ef46b9000	R-X	heap page
-[13231.061666] vm_start:0x00007f3ef46b9000, vm_end:0x00007f3ef48b9000	---	heap page
-[13231.061670] vm_start:0x00007f3ef48b9000, vm_end:0x00007f3ef48ba000	R--	heap page
-[13231.061674] vm_start:0x00007f3ef48ba000, vm_end:0x00007f3ef48bb000	RW-	heap page
-[13231.061677] vm_start:0x00007f3ef48bb000, vm_end:0x00007f3ef48bf000	RW-	heap page
-[13231.061681] vm_start:0x00007f3ef48bf000, vm_end:0x00007f3ef48e3000	R-X	heap page
-[13231.061686] vm_start:0x00007f3ef4abc000, vm_end:0x00007f3ef4ac0000	RW-	heap page
-[13231.061690] vm_start:0x00007f3ef4adf000, vm_end:0x00007f3ef4ae0000	RW-	heap page
-[13231.061693] vm_start:0x00007f3ef4ae0000, vm_end:0x00007f3ef4ae2000	RW-	heap page
-[13231.061697] vm_start:0x00007f3ef4ae2000, vm_end:0x00007f3ef4ae3000	R--	heap page
-[13231.061701] vm_start:0x00007f3ef4ae3000, vm_end:0x00007f3ef4ae4000	RW-	heap page
-[13231.061705] vm_start:0x00007f3ef4ae4000, vm_end:0x00007f3ef4ae5000	RW-	heap page
-[13231.061710] vm_start:0x00007fff9dd47000, vm_end:0x00007fff9dd69000	RW-	heap page
-[13231.061713] vm_start:0x00007fff9ddc8000, vm_end:0x00007fff9ddca000	R--	heap page
-[13231.061718] task nginx total mapped vm 5668, total 843 vmas can exec
+[16138.350415] Module initing
+[16138.350449] code start addr: 0x400000	,end addr: 0x48a2b4
+[16138.350452] current caching 0x7f3ef3fdc000->0x7f3ef3fde000
+[16138.350453] current caching 0x69b000->0x6aa000
+[16138.350455] current caching 0x7f3ef3fde000->0x7f3ef3fe2000
+[16138.350457] current caching 0x68b000->0x69b000
+[16138.350459] vm_start:0x400000, vm_end:0x48b000	R-X	
+[16138.350464] vm_start:0x68a000, vm_end:0x68b000	R--	
+[16138.350467] vm_start:0x68b000, vm_end:0x69b000	RW-	
+[16138.350470] vm_start:0x69b000, vm_end:0x6aa000	RW-	
+[16138.350473] vm_start:0x1b56000, vm_end:0x1b98000	RW-	
+[16138.350477] vm_start:0x7f3ef33dc000, vm_end:0x7f3ef33e8000	R-X	heap page
+[16138.350481] vm_start:0x7f3ef33e8000, vm_end:0x7f3ef35e7000	---	heap page
+[16138.350485] vm_start:0x7f3ef35e7000, vm_end:0x7f3ef35e8000	R--	heap page
+[16138.350489] vm_start:0x7f3ef35e8000, vm_end:0x7f3ef35e9000	RW-	heap page
+[16138.350493] vm_start:0x7f3ef35e9000, vm_end:0x7f3ef35f4000	R-X	heap page
+[16138.350496] vm_start:0x7f3ef35f4000, vm_end:0x7f3ef37f3000	---	heap page
+[16138.350501] vm_start:0x7f3ef37f3000, vm_end:0x7f3ef37f4000	R--	heap page
+[16138.350504] vm_start:0x7f3ef37f4000, vm_end:0x7f3ef37f5000	RW-	heap page
+[16138.350508] vm_start:0x7f3ef37f5000, vm_end:0x7f3ef380c000	R-X	heap page
+[16138.350512] vm_start:0x7f3ef380c000, vm_end:0x7f3ef3a0b000	---	heap page
+[16138.350516] vm_start:0x7f3ef3a0b000, vm_end:0x7f3ef3a0c000	R--	heap page
+[16138.350520] vm_start:0x7f3ef3a0c000, vm_end:0x7f3ef3a0d000	RW-	heap page
+[16138.350523] vm_start:0x7f3ef3a0d000, vm_end:0x7f3ef3a0f000	RW-	heap page
+[16138.350527] vm_start:0x7f3ef3a0f000, vm_end:0x7f3ef3a17000	R-X	heap page
+[16138.350531] vm_start:0x7f3ef3a17000, vm_end:0x7f3ef3c16000	---	heap page
+[16138.350535] vm_start:0x7f3ef3c16000, vm_end:0x7f3ef3c17000	R--	heap page
+[16138.350538] vm_start:0x7f3ef3c17000, vm_end:0x7f3ef3c18000	RW-	heap page
+[16138.350542] vm_start:0x7f3ef3c18000, vm_end:0x7f3ef3dd8000	R-X	heap page
+[16138.350546] vm_start:0x7f3ef3dd8000, vm_end:0x7f3ef3fd8000	---	heap page
+[16138.350550] vm_start:0x7f3ef3fd8000, vm_end:0x7f3ef3fdc000	R--	heap page
+[16138.350553] vm_start:0x7f3ef3fdc000, vm_end:0x7f3ef3fde000	RW-	heap page
+[16138.350558] vm_start:0x7f3ef3fde000, vm_end:0x7f3ef3fe2000	RW-	heap page
+[16138.350562] vm_start:0x7f3ef3fe2000, vm_end:0x7f3ef3ffb000	R-X	heap page
+[16138.350566] vm_start:0x7f3ef3ffb000, vm_end:0x7f3ef41fa000	---	heap page
+[16138.350569] vm_start:0x7f3ef41fa000, vm_end:0x7f3ef41fb000	R--	heap page
+[16138.350573] vm_start:0x7f3ef41fb000, vm_end:0x7f3ef41fc000	RW-	heap page
+[16138.350577] vm_start:0x7f3ef41fc000, vm_end:0x7f3ef4268000	R-X	heap page
+[16138.350581] vm_start:0x7f3ef4268000, vm_end:0x7f3ef4467000	---	heap page
+[16138.350585] vm_start:0x7f3ef4467000, vm_end:0x7f3ef4468000	R--	heap page
+[16138.350589] vm_start:0x7f3ef4468000, vm_end:0x7f3ef4469000	RW-	heap page
+[16138.350593] vm_start:0x7f3ef4469000, vm_end:0x7f3ef4472000	R-X	heap page
+[16138.350596] vm_start:0x7f3ef4472000, vm_end:0x7f3ef4671000	---	heap page
+[16138.350600] vm_start:0x7f3ef4671000, vm_end:0x7f3ef4672000	R--	heap page
+[16138.350604] vm_start:0x7f3ef4672000, vm_end:0x7f3ef4673000	RW-	heap page
+[16138.350608] vm_start:0x7f3ef4673000, vm_end:0x7f3ef46a1000	RW-	heap page
+[16138.350612] vm_start:0x7f3ef46a1000, vm_end:0x7f3ef46b9000	R-X	heap page
+[16138.350616] vm_start:0x7f3ef46b9000, vm_end:0x7f3ef48b9000	---	heap page
+[16138.350619] vm_start:0x7f3ef48b9000, vm_end:0x7f3ef48ba000	R--	heap page
+[16138.350623] vm_start:0x7f3ef48ba000, vm_end:0x7f3ef48bb000	RW-	heap page
+[16138.350628] vm_start:0x7f3ef48bb000, vm_end:0x7f3ef48bf000	RW-	heap page
+[16138.350631] vm_start:0x7f3ef48bf000, vm_end:0x7f3ef48e3000	R-X	heap page
+[16138.350635] vm_start:0x7f3ef4abc000, vm_end:0x7f3ef4ac0000	RW-	heap page
+[16138.350639] vm_start:0x7f3ef4adf000, vm_end:0x7f3ef4ae0000	RW-	heap page
+[16138.350643] vm_start:0x7f3ef4ae0000, vm_end:0x7f3ef4ae2000	RW-	heap page
+[16138.350647] vm_start:0x7f3ef4ae2000, vm_end:0x7f3ef4ae3000	R--	heap page
+[16138.350651] vm_start:0x7f3ef4ae3000, vm_end:0x7f3ef4ae4000	RW-	heap page
+[16138.350655] vm_start:0x7f3ef4ae4000, vm_end:0x7f3ef4ae5000	RW-	heap page
+[16138.350659] vm_start:0x7fff9dd47000, vm_end:0x7fff9dd69000	RW-	heap page
+[16138.350663] vm_start:0x7fff9ddc8000, vm_end:0x7fff9ddca000	R--	heap page
+[16138.350667] task nginx total mapped vm 5668, total 843 vmas can exec

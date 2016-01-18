@@ -11,6 +11,21 @@
 #include <linux/kallsyms.h>
 #include <linux/string.h>
 
+
+static struct vm_operations_struct *vm_ops;
+static struct vm_operations_struct *old_ops;
+
+int (*fault)(struct vm_area_struct *vma, struct vm_fault *vmf);
+
+int new_fault_handle(struct vm_area_struct *vma, struct vm_fault *vmf)
+{
+    return 0;
+}
+int set_new_fault(struct vm_area_struct *vma) 
+{
+    
+}
+
 int (*func)(struct vm_area_struct *vma,
             struct vm_area_struct **pprev, unsigned long start, 
            unsigned long end, unsigned long newflags);
@@ -119,4 +134,11 @@ int init_task_vma(struct task_struct *task)
     return 0;
 }
 
-
+struct page *my_get_page(struct vm_area_struct *vma,
+                     unsigned long address, unsigned int foll_flags)
+{
+    struct page *(*fp)(struct vm_area_struct *, unsigned long , unsigned int);
+    unsigned long func = kallsyms_lookup_name("follow_page");
+    fp = func;
+    return (*fp)(vma, address, foll_flags);
+}

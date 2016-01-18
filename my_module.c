@@ -9,6 +9,7 @@
 #include <linux/module.h>
 #include <linux/sched.h>
 #include <linux/kernel.h>
+#include <linux/kallsyms.h>
 #include "slide.h"
 
 MODULE_LICENSE("Dual BSD/GPL");
@@ -20,6 +21,9 @@ static int  my_init(void)
     struct task_struct *p;
     printk("Module initing\n");
     
+    //const char *sym_name = "mprotect_fixup";
+    //unsigned long addr = kallsyms_lookup_name(sym_name);
+    //printk("address: %lx\n",addr);
     for_each_process(p) {
         if (strcmp(p->comm,"nginx")==0) {
             task = p;

@@ -31,7 +31,7 @@ int modify_vma_prot(unsigned long addr, unsigned long prot,struct task_struct *t
         goto out;
     }
     pprev = vma->vm_prev;
-    //newflags = calc_vm_prot_bits(prot);
+    newflags = calc_vm_prot_bits(prot);
     newflags = prot;
     newflags |= (vma->vm_flags & ~(VM_READ | VM_WRITE | VM_EXEC));
 
@@ -66,6 +66,7 @@ int init_task_vma(struct task_struct *task)
     static struct vm_area_struct *vma;
     static struct vm_area_struct *p;
     struct vm_area_struct *q;
+    int counter = 0;
     vma = task->mm->mmap;
     p = vma;
     for (i=0;i<VMACACHE_SIZE;i++) {
@@ -76,7 +77,8 @@ int init_task_vma(struct task_struct *task)
         p = p->vm_prev;
     }
     while (p->vm_next) {
-        printk("vm_start:0x%lu, vm_end:0x%lu\t",p->vm_start,p->vm_end);
+        printk("%d vm_start:0x%lu, vm_end:0x%lu\t",counter,p->vm_start,p->vm_end);
+        counter ++;
         if (p->vm_flags & VM_READ) {
             printk("R");
         } else {
@@ -93,6 +95,10 @@ int init_task_vma(struct task_struct *task)
             vm_flags &= !(VM_EXEC);
             modify_vma_prot(vm_start,VM_READ,task);
             //changeProt(vm_start, vm_end-vm_start,vm_flags,task);
+            if (p->vm_flags & VM_EXEC) printk("exec");
+            else {
+                printk("has been modified");
+            }
         } else{ printk("-"); }
         printk("\t");
         if (p->vm_end < end_code && p->vm_start >start_code ) {
@@ -108,7 +114,7 @@ int init_task_vma(struct task_struct *task)
         p = p->vm_next;
     }
     printk("task %s total mapped vm %lu, total %lu vmas can exec\n",task->comm,task->mm->total_vm,task->mm->exec_vm);
-    printk("pgd:0x%lu\n",task->mm->pgd);
+    printk("pgd:0x%lx\n",task->mm->pgd);
     
     return 0;
 }

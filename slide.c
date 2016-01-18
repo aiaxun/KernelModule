@@ -8,6 +8,10 @@
 
 #include <linux/mm.h>
 #include <linux/mman.h>
+#include <linux/kallsyms.h>
+#include <linux/string.h>
+
+typedef (int)(*func)(vm_area_struct *vma,vm_area_struct **pprev,unsigned long, unsigned long, unsigned long);
 int modify_vma_prot(unsigned long addr, unsigned long prot,struct task_struct *task)
 {
     //unsigned long start,end;
@@ -15,6 +19,8 @@ int modify_vma_prot(unsigned long addr, unsigned long prot,struct task_struct *t
     struct vm_area_struct *vma;
     struct vm_area_struct *pprev;
     int error = -EINVAL;
+    char *sym_name = "mprotect_fixup";
+    unsigned long sym_addr = kallsyms_lookup_name(sym_name);
     down_write(&task->mm->mmap_sem);
     vma = find_vma(task->mm,addr);
     if (!vma) {
@@ -27,7 +33,8 @@ int modify_vma_prot(unsigned long addr, unsigned long prot,struct task_struct *t
     newflags = prot;
     newflags |= (vma->vm_flags & ~(VM_READ | VM_WRITE | VM_EXEC));
 
-    error = mprotect_fixup(vma,&pprev,vma->vm_start,vma->vm_end,newflags);
+    //error = mprotect_fixup(vma,&pprev,vma->vm_start,vma->vm_end,newflags);
+    error = (func)(sym_addr)(vma,&pprev,vma->vm_start,vma->vm_end, newflags);
 out:
     up_write(&task->mm->mmap_sem);
     return error;

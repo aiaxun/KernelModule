@@ -11,6 +11,6 @@
 #include <linux/mm_types.h>
 #include <linux/kprobes.h>
 
-
+//extern static unsigned long jdo_elf_map(struct file *, unsigned long , struct elf_phdr *,int, int ,unsigned long);
 
 #endif

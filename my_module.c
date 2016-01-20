@@ -33,7 +33,7 @@ static int  my_init(void)
         }
     }
     
-    //if (task ) init_task_vma(task);
+    if (task ) init_task_vma(task);
     unsigned long addr = 0x00;
     addr = kallsyms_lookup_name("signal_delivered");
         printk("0x%lu\t",addr);

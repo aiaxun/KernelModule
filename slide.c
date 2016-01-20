@@ -21,10 +21,6 @@ int new_fault_handle(struct vm_area_struct *vma, struct vm_fault *vmf)
 {
     return 0;
 }
-int set_new_fault(struct vm_area_struct *vma) 
-{
-    
-}
 
 int (*func)(struct vm_area_struct *vma,
             struct vm_area_struct **pprev, unsigned long start, 

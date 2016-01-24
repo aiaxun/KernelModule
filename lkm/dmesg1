@@ -1,0 +1,1096 @@
+[    0.000000] Initializing cgroup subsys cpuset
+
+[    0.000000] NX (Execute Disable) protection: active
+
+[   85.976343] jmp_src @ ffffffff810842e0:
+[   85.976345] 0f 1f 44 00 00 55 48 89 e5 53 48 83 ec 18 85 ff 
+[   85.976350] [intercept.c] inserting relative jump ffffffff810842e0 --> ffffffffc0c4299f
+[   85.976351] jmp_src @ ffffffff810842e0:
+[   85.976352] e9 ba e6 bb 3f 55 48 89 e5 53 48 83 ec 18 85 ff 
+[   85.976356] jmp_back_src @ ffffffffc0c429b5:
+[   85.976356] 90 90 90 90 90 48 83 f8 09 74 2f 48 83 f8 0a 0f 
+[   85.976360] [intercept.c] inserting relative jump ffffffffc0c429b5 --> ffffffff810842e5
+[   85.976361] jmp_back_src @ ffffffffc0c429b5:
+[   85.976361] e9 2b 19 44 c0 48 83 f8 09 74 2f 48 83 f8 0a 0f 
+[   85.989825] page fault: addr_dft_page_fault=0xffffffff817b87c0
+[   85.989826] page fault: addr_dft_do_page_fault=0xffffffff81062280
+[   85.989827] page fault: addr_pv_irq_ops=0xffffffff81c31ac0
+[   85.989828] page fault: addr_error_entry=0xffffffff817b8980
+[   85.989828] page fault: addr_error_exit=0xffffffff817b8a30
+[   85.989829] page fault handler: alloc a page to store new idt table.
+[   85.989830] page fault handler: load the new idt table.
+[   85.989831] page fault handler: new idt table loaded.
+[   85.989851] page fault handler: all CPUs have loaded the new idt table.
+[   85.989852] Armor module initialized
+[   92.583838] armor-module is being opened
+[   92.596481] Waiting for target to start...
+[  110.800055] armor-module is being opened
+[  110.800063] A:0:0: ARMOR_COPY
+[  110.800082] A:0:0: ARMOR_INIT
+[  110.800085] Getting offsets
+[  110.800097] Copying to user
+[  110.800134] Waiting for library instrumentation to finish...
+[  110.800224] A:2:0: Enabling LBR
+[  110.800242] A:1:0: 
+[  110.800244] A:3:0: Enabling LBR
+[  110.800246] Enabling LBR
+[  110.800252] A:0:0: Enabling LBR
+[  110.800256] A:0:0: ARMOR_INIT, start: 400000
+[  110.800257] A:0:0: ARMOR_INIT, end  : 4007c4
+[  110.800258] A:0:0: copied!
+[  110.800333] change 400000 page nx
+[  110.800334] ------------[ cut here ]------------
+[  110.800339] WARNING: CPU: 0 PID: 2728 at /build/linux-lts-vivid-whAhIw/linux-lts-vivid-3.19.0/arch/x86/mm/pageattr.c:1379 change_page_attr_set_clr+0x2d8/0x490()
+[  110.800340] Modules linked in: md4 armor_module(OE) ctr ccm bnep rfcomm binfmt_misc snd_hda_codec_hdmi joydev dcdbas snd_hda_codec_realtek snd_hda_codec_generic snd_hda_intel snd_hda_controller snd_hda_codec snd_hwdep snd_pcm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device i8k snd_timer arc4 intel_rapl iosf_mbi x86_pkg_temp_thermal intel_powerclamp coretemp kvm_intel kvm crct10dif_pclmul crc32_pclmul ghash_clmulni_intel aesni_intel ath9k ath9k_common aes_x86_64 lrw gf128mul ath9k_hw glue_helper ablk_helper cryptd ath mac80211 serio_raw ath3k cfg80211 snd btusb bluetooth lpc_ich nouveau mei_me mei mxm_wmi wmi ttm drm_kms_helper drm soundcore i2c_algo_bit video shpchp mac_hid parport_pc ppdev lp parport ums_realtek uas usb_storage hid_generic usbhid hid psmouse ahci r8169 libahci mii
+[  110.800376] CPU: 0 PID: 2728 Comm: test Tainted: G           OE  3.19.0-25-generic #26~14.04.1-Ubuntu
+[  110.800377] Hardware name: Dell Inc. Inspiron 3847/088DT1       , BIOS A04 04/03/2014
+[  110.800378]  ffffffff81a8de20 ffff8801f5397cd8 ffffffff817aed00 0000000000000000
+[  110.800379]  0000000000000000 ffff8801f5397d18 ffffffff81074d8a 0000000000000000
+[  110.800381]  ffff8801f5397df0 0000000000400000 8000000000000000 ffff8801f5397d68
+[  110.800382] Call Trace:
+[  110.800387]  [<ffffffff817aed00>] dump_stack+0x45/0x57
+[  110.800390]  [<ffffffff81074d8a>] warn_slowpath_common+0x8a/0xc0
+[  110.800400]  [<ffffffff81074e7a>] warn_slowpath_null+0x1a/0x20
+[  110.800402]  [<ffffffff81064ec8>] change_page_attr_set_clr+0x2d8/0x490
+[  110.800403]  [<ffffffff81065743>] set_memory_nx+0x43/0x50
+[  110.800406]  [<ffffffffc0c4236b>] make_nx+0x1b/0x40 [armor_module]
+[  110.800408]  [<ffffffffc0c42474>] mark_all_pages_nx+0x64/0x90 [armor_module]
+[  110.800410]  [<ffffffffc0c40d7f>] armor_ioctl+0x6df/0xcf0 [armor_module]
+[  110.800412]  [<ffffffff811ffa58>] do_vfs_ioctl+0x2f8/0x510
+[  110.800414]  [<ffffffff817b1e0b>] ? __schedule+0x37b/0x830
+[  110.800415]  [<ffffffff811ffcf1>] SyS_ioctl+0x81/0xa0
+[  110.800418]  [<ffffffff817b668d>] system_call_fastpath+0x16/0x1b
+[  110.800419] ---[ end trace 6f4a6dbcc511c5ee ]---
+[  110.800423] change 400008 page nx
+[  110.800434] change 400010 page nx
+[  110.800437] change 400018 page nx
+[  110.800440] change 400020 page nx
+[  110.800443] change 400028 page nx
+[  110.800446] change 400030 page nx
+[  110.800448] change 400038 page nx
+[  110.800451] change 400040 page nx
+[  110.800454] change 400048 page nx
+[  110.800457] change 400050 page nx
+[  110.800460] change 400058 page nx
+[  110.800463] change 400060 page nx
+[  110.800466] change 400068 page nx
+[  110.800469] change 400070 page nx
+[  110.800472] change 400078 page nx
+[  110.800475] change 400080 page nx
+[  110.800478] change 400088 page nx
+[  110.800481] change 400090 page nx
+[  110.800484] change 400098 page nx
+[  110.800487] change 4000a0 page nx
+[  110.800490] change 4000a8 page nx
+[  110.800492] change 4000b0 page nx
+[  110.800495] change 4000b8 page nx
+[  110.800498] change 4000c0 page nx
+[  110.800501] change 4000c8 page nx
+[  110.800504] change 4000d0 page nx
+[  110.800507] change 4000d8 page nx
+[  110.800510] change 4000e0 page nx
+[  110.800513] change 4000e8 page nx
+[  110.800516] change 4000f0 page nx
+[  110.800519] change 4000f8 page nx
+[  110.800522] change 400100 page nx
+[  110.800525] change 400108 page nx
+[  110.800528] change 400110 page nx
+[  110.800531] change 400118 page nx
+[  110.800534] change 400120 page nx
+[  110.800536] change 400128 page nx
+[  110.800539] change 400130 page nx
+[  110.800542] change 400138 page nx
+[  110.800545] change 400140 page nx
+[  110.800548] change 400148 page nx
+[  110.800551] change 400150 page nx
+[  110.800554] change 400158 page nx
+[  110.800557] change 400160 page nx
+[  110.800560] change 400168 page nx
+[  110.800563] change 400170 page nx
+[  110.800566] change 400178 page nx
+[  110.800569] change 400180 page nx
+[  110.800572] change 400188 page nx
+[  110.800575] change 400190 page nx
+[  110.800578] change 400198 page nx
+[  110.800581] change 4001a0 page nx
+[  110.800584] change 4001a8 page nx
+[  110.800586] change 4001b0 page nx
+[  110.800589] change 4001b8 page nx
+[  110.800592] change 4001c0 page nx
+[  110.800595] change 4001c8 page nx
+[  110.800598] change 4001d0 page nx
+[  110.800601] change 4001d8 page nx
+[  110.800604] change 4001e0 page nx
+[  110.800607] change 4001e8 page nx
+[  110.800610] change 4001f0 page nx
+[  110.800613] change 4001f8 page nx
+[  110.800616] change 400200 page nx
+[  110.800619] change 400208 page nx
+[  110.800622] change 400210 page nx
+[  110.800625] change 400218 page nx
+[  110.800628] change 400220 page nx
+[  110.800631] change 400228 page nx
+[  110.800634] change 400230 page nx
+[  110.800636] change 400238 page nx
+[  110.800639] change 400240 page nx
+[  110.800642] change 400248 page nx
+[  110.800645] change 400250 page nx
+[  110.800648] change 400258 page nx
+[  110.800651] change 400260 page nx
+[  110.800654] change 400268 page nx
+[  110.800657] change 400270 page nx
+[  110.800660] change 400278 page nx
+[  110.800663] change 400280 page nx
+[  110.800666] change 400288 page nx
+[  110.800669] change 400290 page nx
+[  110.800672] change 400298 page nx
+[  110.800675] change 4002a0 page nx
+[  110.800678] change 4002a8 page nx
+[  110.800681] change 4002b0 page nx
+[  110.800683] change 4002b8 page nx
+[  110.800686] change 4002c0 page nx
+[  110.800689] change 4002c8 page nx
+[  110.800692] change 4002d0 page nx
+[  110.800695] change 4002d8 page nx
+[  110.800698] change 4002e0 page nx
+[  110.800701] change 4002e8 page nx
+[  110.800704] change 4002f0 page nx
+[  110.800707] change 4002f8 page nx
+[  110.800710] change 400300 page nx
+[  110.800713] change 400308 page nx
+[  110.800716] change 400310 page nx
+[  110.800719] change 400318 page nx
+[  110.800722] change 400320 page nx
+[  110.800725] change 400328 page nx
+[  110.800728] change 400330 page nx
+[  110.800730] change 400338 page nx
+[  110.800733] change 400340 page nx
+[  110.800736] change 400348 page nx
+[  110.800739] change 400350 page nx
+[  110.800742] change 400358 page nx
+[  110.800745] change 400360 page nx
+[  110.800748] change 400368 page nx
+[  110.800751] change 400370 page nx
+[  110.800754] change 400378 page nx
+[  110.800757] change 400380 page nx
+[  110.800760] change 400388 page nx
+[  110.800763] change 400390 page nx
+[  110.800766] change 400398 page nx
+[  110.800769] change 4003a0 page nx
+[  110.800772] change 4003a8 page nx
+[  110.800774] change 4003b0 page nx
+[  110.800777] change 4003b8 page nx
+[  110.800780] change 4003c0 page nx
+[  110.800783] change 4003c8 page nx
+[  110.800786] change 4003d0 page nx
+[  110.800789] change 4003d8 page nx
+[  110.800792] change 4003e0 page nx
+[  110.800795] change 4003e8 page nx
+[  110.800798] change 4003f0 page nx
+[  110.800801] change 4003f8 page nx
+[  110.800804] change 400400 page nx
+[  110.800807] change 400408 page nx
+[  110.800810] change 400410 page nx
+[  110.800813] change 400418 page nx
+[  110.800816] change 400420 page nx
+[  110.800818] change 400428 page nx
+[  110.800821] change 400430 page nx
+[  110.800824] change 400438 page nx
+[  110.800827] change 400440 page nx
+[  110.800830] change 400448 page nx
+[  110.800833] change 400450 page nx
+[  110.800836] change 400458 page nx
+[  110.800839] change 400460 page nx
+[  110.800842] change 400468 page nx
+[  110.800845] change 400470 page nx
+[  110.800848] change 400478 page nx
+[  110.800851] change 400480 page nx
+[  110.800854] change 400488 page nx
+[  110.800857] change 400490 page nx
+[  110.800860] change 400498 page nx
+[  110.800863] change 4004a0 page nx
+[  110.800865] change 4004a8 page nx
+[  110.800868] change 4004b0 page nx
+[  110.800871] change 4004b8 page nx
+[  110.800874] change 4004c0 page nx
+[  110.800877] change 4004c8 page nx
+[  110.800880] change 4004d0 page nx
+[  110.800883] change 4004d8 page nx
+[  110.800886] change 4004e0 page nx
+[  110.800889] change 4004e8 page nx
+[  110.800892] change 4004f0 page nx
+[  110.800895] change 4004f8 page nx
+[  110.800898] change 400500 page nx
+[  110.800901] change 400508 page nx
+[  110.800904] change 400510 page nx
+[  110.800907] change 400518 page nx
+[  110.800910] change 400520 page nx
+[  110.800912] change 400528 page nx
+[  110.800915] change 400530 page nx
+[  110.800918] change 400538 page nx
+[  110.800921] change 400540 page nx
+[  110.800924] change 400548 page nx
+[  110.800927] change 400550 page nx
+[  110.800930] change 400558 page nx
+[  110.800933] change 400560 page nx
+[  110.800936] change 400568 page nx
+[  110.800939] change 400570 page nx
+[  110.800942] change 400578 page nx
+[  110.800945] change 400580 page nx
+[  110.800948] change 400588 page nx
+[  110.800951] change 400590 page nx
+[  110.800954] change 400598 page nx
+[  110.800957] change 4005a0 page nx
+[  110.800960] change 4005a8 page nx
+[  110.800962] change 4005b0 page nx
+[  110.800965] change 4005b8 page nx
+[  110.800968] change 4005c0 page nx
+[  110.800971] change 4005c8 page nx
+[  110.800974] change 4005d0 page nx
+[  110.800977] change 4005d8 page nx
+[  110.800980] change 4005e0 page nx
+[  110.800983] change 4005e8 page nx
+[  110.800986] change 4005f0 page nx
+[  110.800989] change 4005f8 page nx
+[  110.800992] change 400600 page nx
+[  110.800995] change 400608 page nx
+[  110.800998] change 400610 page nx
+[  110.801001] change 400618 page nx
+[  110.801004] change 400620 page nx
+[  110.801007] change 400628 page nx
+[  110.801010] change 400630 page nx
+[  110.801012] change 400638 page nx
+[  110.801015] change 400640 page nx
+[  110.801018] change 400648 page nx
+[  110.801021] change 400650 page nx
+[  110.801024] change 400658 page nx
+[  110.801027] change 400660 page nx
+[  110.801030] change 400668 page nx
+[  110.801033] change 400670 page nx
+[  110.801036] change 400678 page nx
+[  110.801039] change 400680 page nx
+[  110.801042] change 400688 page nx
+[  110.801045] change 400690 page nx
+[  110.801048] change 400698 page nx
+[  110.801051] change 4006a0 page nx
+[  110.801054] change 4006a8 page nx
+[  110.801057] change 4006b0 page nx
+[  110.801060] change 4006b8 page nx
+[  110.801063] change 4006c0 page nx
+[  110.801066] change 4006c8 page nx
+[  110.801069] change 4006d0 page nx
+[  110.801072] change 4006d8 page nx
+[  110.801074] change 4006e0 page nx
+[  110.801077] change 4006e8 page nx
+[  110.801080] change 4006f0 page nx
+[  110.801083] change 4006f8 page nx
+[  110.801086] change 400700 page nx
+[  110.801089] change 400708 page nx
+[  110.801092] change 400710 page nx
+[  110.801095] change 400718 page nx
+[  110.801098] change 400720 page nx
+[  110.801101] change 400728 page nx
+[  110.801104] change 400730 page nx
+[  110.801107] change 400738 page nx
+[  110.801110] change 400740 page nx
+[  110.801113] change 400748 page nx
+[  110.801116] change 400750 page nx
+[  110.801119] change 400758 page nx
+[  110.801122] change 400760 page nx
+[  110.801125] change 400768 page nx
+[  110.801128] change 400770 page nx
+[  110.801130] change 400778 page nx
+[  110.801133] change 400780 page nx
+[  110.801136] change 400788 page nx
+[  110.801139] change 400790 page nx
+[  110.801142] change 400798 page nx
+[  110.801145] change 4007a0 page nx
+[  110.801148] change 4007a8 page nx
+[  110.801151] change 4007b0 page nx
+[  110.801154] change 4007b8 page nx
+[  110.801157] change 4007c0 page nx
+[  110.801158] make all pages nx, test
+[  111.416775] armor-module is being opened
+[  111.416784] Got a PLT - GOT table:
+[  111.416785] 0000000000400410: 00007f7327b6c400
+[  111.416786] 0000000000400420: 00007f73291714fe
+[  111.416787] 0000000000400430:           (null)
+[  111.416792] Copying PLT-GOT meta data
+[  111.416793] Got a exit points table
+[  111.416806] Copying PLT data
+[  111.416807] Copying GOT data
+[  111.416814] Waiting for exit points to become ready...
+[  111.416814] Copying simples
+[  111.416816] Copying exitpoints
+[  111.416819] A:3:0: GET_JIT - JIT analyzer is waiting for work now
+[  157.314056] A:0:0: GET_JIT: INTERRUPTED!
+[  157.314168] di-opt[2604]: segfault at f78fc20 ip 00007f7977c1461d sp 00007fff219322d8 error 6 in libc-2.19.so[7f7977b88000+1bb000]
+[  170.735981] A:2:0: BYE BYE! - do_exit for task @ 0xffff8800c639ebf0
+[  170.735986] A:2:0: EXIT. locking lib mutex
+[  170.735987] A:2:0: EXIT. locking cbk mutex
+[  170.735989] A:2:0: EXIT. locking sig mutex
+[  170.735990] A:2:0: EXIT done
+[  170.736112] Some statistics:
+[  170.736114] Signal handlers entered: 0
+[  170.736114] Signal returns:          0
+[  170.736115] Library calls:    5058703
+[  170.736115] Library returns:  5058702
+[  170.736116] Callback calls:   0
+[  170.736116] Callback returns: 0
+[  170.736117] 
+[  170.736117] Number of newly created tasks: 0
+[  170.736118] Number of exited tasks:        1
+[  170.736118] 
+[  170.736119] System calls to execve:    0
+[  170.736119] System calls to read:    0
+[  170.736120] System calls to write:    0
+[  170.736120] System calls to mmap:      0     (only PROT_EXEC: 0)
+[  170.736121] System calls to mprotect:  0     (only PROT_EXEC: 0)
+[  170.736122] System calls to sigaction: 0
+[  170.736122] System calls total:        0
+[  170.736123] 
+[  170.736123] Context switches (sched-out): 8909910
+[  170.736124] Context switches (sched-in):  8909910
+[  170.736124] 
+[  170.736125] Number of digests computed: 0
+[  170.736125] LBR JIT lookups:     0
+[  170.736126] LBR JIT cache hits:  0
+[  170.736126] LBR JIT hits:        0
+[  170.736127] LBR JIT misses:      0
+[  170.736127] LBR JIT unsupported: 0
+[  170.736128] LBR JIT timeouts:    0
+[  170.736128] LBR JIT sec:         0
+[  170.736128] LBR JIT usec:        0
+[  170.736129] armor-module is now closed
+[  442.350241] jmp_src @ ffffffff810842e0:
+[  442.350246] 90 90 90 90 90 55 48 89 e5 53 48 83 ec 18 85 ff 
+[  442.350258] [intercept.c] inserting relative jump ffffffff810842e0 --> ffffffffc0f379bf
+[  442.350262] jmp_src @ ffffffff810842e0:
+[  442.350264] e9 da 36 eb 3f 55 48 89 e5 53 48 83 ec 18 85 ff 
+[  442.350274] jmp_back_src @ ffffffffc0f379d5:
+[  442.350275] 90 90 90 90 90 48 83 f8 09 74 2f 48 83 f8 0a 0f 
+[  442.350285] [intercept.c] inserting relative jump ffffffffc0f379d5 --> ffffffff810842e5
+[  442.350288] jmp_back_src @ ffffffffc0f379d5:
+[  442.350289] e9 0b c9 14 c0 48 83 f8 09 74 2f 48 83 f8 0a 0f 
+[  442.375943] page fault: addr_dft_page_fault=0xffffffff817b87c0
+[  442.375946] page fault: addr_dft_do_page_fault=0xffffffff81062280
+[  442.375947] page fault: addr_pv_irq_ops=0xffffffff81c31ac0
+[  442.375948] page fault: addr_error_entry=0xffffffff817b8980
+[  442.375949] page fault: addr_error_exit=0xffffffff817b8a30
+[  442.375950] page fault handler: alloc a page to store new idt table.
+[  442.375953] page fault handler: load the new idt table.
+[  442.375954] page fault handler: new idt table loaded.
+[  442.375974] page fault handler: all CPUs have loaded the new idt table.
+[  442.375975] Armor module initialized
+[  474.625133] armor-module is being opened
+[  474.625142] Waiting for target to start...
+[  487.707875] armor-module is being opened
+[  487.707883] A:3:0: ARMOR_COPY
+[  487.707902] A:3:0: ARMOR_INIT
+[  487.707907] Getting offsets
+[  487.707922] Copying to user
+[  487.707966] Waiting for library instrumentation to finish...
+[  487.708071] A:2:0: 
+[  487.708072] A:1:0: 
+[  487.708072] A:0:0: 
+[  487.708072] Enabling LBR
+[  487.708074] Enabling LBR
+[  487.708075] Enabling LBR
+[  487.708079] A:3:0: Enabling LBR
+[  487.708083] A:3:0: ARMOR_INIT, start: 400000
+[  487.708088] A:3:0: ARMOR_INIT, end  : 4007c4
+[  487.708090] A:3:0: copied!
+[  487.708136] change 400000 page nx
+[  487.708140] change 400008 page nx
+[  487.708143] change 400010 page nx
+[  487.708146] change 400018 page nx
+[  487.708149] change 400020 page nx
+[  487.708152] change 400028 page nx
+[  487.708155] change 400030 page nx
+[  487.708158] change 400038 page nx
+[  487.708161] change 400040 page nx
+[  487.708164] change 400048 page nx
+[  487.708167] change 400050 page nx
+[  487.708170] change 400058 page nx
+[  487.708173] change 400060 page nx
+[  487.708176] change 400068 page nx
+[  487.708179] change 400070 page nx
+[  487.708182] change 400078 page nx
+[  487.708185] change 400080 page nx
+[  487.708188] change 400088 page nx
+[  487.708191] change 400090 page nx
+[  487.708194] change 400098 page nx
+[  487.708197] change 4000a0 page nx
+[  487.708200] change 4000a8 page nx
+[  487.708203] change 4000b0 page nx
+[  487.708206] change 4000b8 page nx
+[  487.708209] change 4000c0 page nx
+[  487.708212] change 4000c8 page nx
+[  487.708215] change 4000d0 page nx
+[  487.708218] change 4000d8 page nx
+[  487.708221] change 4000e0 page nx
+[  487.708224] change 4000e8 page nx
+[  487.708227] change 4000f0 page nx
+[  487.708230] change 4000f8 page nx
+[  487.708233] change 400100 page nx
+[  487.708236] change 400108 page nx
+[  487.708239] change 400110 page nx
+[  487.708242] change 400118 page nx
+[  487.708245] change 400120 page nx
+[  487.708248] change 400128 page nx
+[  487.708251] change 400130 page nx
+[  487.708254] change 400138 page nx
+[  487.708257] change 400140 page nx
+[  487.708260] change 400148 page nx
+[  487.708263] change 400150 page nx
+[  487.708266] change 400158 page nx
+[  487.708269] change 400160 page nx
+[  487.708272] change 400168 page nx
+[  487.708275] change 400170 page nx
+[  487.708278] change 400178 page nx
+[  487.708281] change 400180 page nx
+[  487.708284] change 400188 page nx
+[  487.708287] change 400190 page nx
+[  487.708290] change 400198 page nx
+[  487.708293] change 4001a0 page nx
+[  487.708296] change 4001a8 page nx
+[  487.708299] change 4001b0 page nx
+[  487.708302] change 4001b8 page nx
+[  487.708305] change 4001c0 page nx
+[  487.708308] change 4001c8 page nx
+[  487.708311] change 4001d0 page nx
+[  487.708314] change 4001d8 page nx
+[  487.708317] change 4001e0 page nx
+[  487.708320] change 4001e8 page nx
+[  487.708323] change 4001f0 page nx
+[  487.708326] change 4001f8 page nx
+[  487.708329] change 400200 page nx
+[  487.708332] change 400208 page nx
+[  487.708335] change 400210 page nx
+[  487.708338] change 400218 page nx
+[  487.708341] change 400220 page nx
+[  487.708344] change 400228 page nx
+[  487.708347] change 400230 page nx
+[  487.708350] change 400238 page nx
+[  487.708353] change 400240 page nx
+[  487.708356] change 400248 page nx
+[  487.708359] change 400250 page nx
+[  487.708362] change 400258 page nx
+[  487.708365] change 400260 page nx
+[  487.708368] change 400268 page nx
+[  487.708371] change 400270 page nx
+[  487.708374] change 400278 page nx
+[  487.708377] change 400280 page nx
+[  487.708380] change 400288 page nx
+[  487.708383] change 400290 page nx
+[  487.708386] change 400298 page nx
+[  487.708389] change 4002a0 page nx
+[  487.708392] change 4002a8 page nx
+[  487.708395] change 4002b0 page nx
+[  487.708398] change 4002b8 page nx
+[  487.708401] change 4002c0 page nx
+[  487.708404] change 4002c8 page nx
+[  487.708407] change 4002d0 page nx
+[  487.708410] change 4002d8 page nx
+[  487.708413] change 4002e0 page nx
+[  487.708416] change 4002e8 page nx
+[  487.708419] change 4002f0 page nx
+[  487.708422] change 4002f8 page nx
+[  487.708425] change 400300 page nx
+[  487.708428] change 400308 page nx
+[  487.708431] change 400310 page nx
+[  487.708434] change 400318 page nx
+[  487.708437] change 400320 page nx
+[  487.708440] change 400328 page nx
+[  487.708443] change 400330 page nx
+[  487.708446] change 400338 page nx
+[  487.708449] change 400340 page nx
+[  487.708452] change 400348 page nx
+[  487.708455] change 400350 page nx
+[  487.708458] change 400358 page nx
+[  487.708461] change 400360 page nx
+[  487.708464] change 400368 page nx
+[  487.708467] change 400370 page nx
+[  487.708470] change 400378 page nx
+[  487.708473] change 400380 page nx
+[  487.708476] change 400388 page nx
+[  487.708479] change 400390 page nx
+[  487.708482] change 400398 page nx
+[  487.708485] change 4003a0 page nx
+[  487.708488] change 4003a8 page nx
+[  487.708491] change 4003b0 page nx
+[  487.708494] change 4003b8 page nx
+[  487.708497] change 4003c0 page nx
+[  487.708500] change 4003c8 page nx
+[  487.708503] change 4003d0 page nx
+[  487.708506] change 4003d8 page nx
+[  487.708509] change 4003e0 page nx
+[  487.708512] change 4003e8 page nx
+[  487.708515] change 4003f0 page nx
+[  487.708518] change 4003f8 page nx
+[  487.708521] change 400400 page nx
+[  487.708524] change 400408 page nx
+[  487.708527] change 400410 page nx
+[  487.708530] change 400418 page nx
+[  487.708533] change 400420 page nx
+[  487.708536] change 400428 page nx
+[  487.708539] change 400430 page nx
+[  487.708542] change 400438 page nx
+[  487.708545] change 400440 page nx
+[  487.708548] change 400448 page nx
+[  487.708551] change 400450 page nx
+[  487.708554] change 400458 page nx
+[  487.708557] change 400460 page nx
+[  487.708560] change 400468 page nx
+[  487.708563] change 400470 page nx
+[  487.708566] change 400478 page nx
+[  487.708569] change 400480 page nx
+[  487.708572] change 400488 page nx
+[  487.708575] change 400490 page nx
+[  487.708578] change 400498 page nx
+[  487.708581] change 4004a0 page nx
+[  487.708584] change 4004a8 page nx
+[  487.708587] change 4004b0 page nx
+[  487.708590] change 4004b8 page nx
+[  487.708593] change 4004c0 page nx
+[  487.708596] change 4004c8 page nx
+[  487.708599] change 4004d0 page nx
+[  487.708602] change 4004d8 page nx
+[  487.708605] change 4004e0 page nx
+[  487.708608] change 4004e8 page nx
+[  487.708611] change 4004f0 page nx
+[  487.708614] change 4004f8 page nx
+[  487.708617] change 400500 page nx
+[  487.708620] change 400508 page nx
+[  487.708623] change 400510 page nx
+[  487.708626] change 400518 page nx
+[  487.708629] change 400520 page nx
+[  487.708632] change 400528 page nx
+[  487.708635] change 400530 page nx
+[  487.708638] change 400538 page nx
+[  487.708641] change 400540 page nx
+[  487.708644] change 400548 page nx
+[  487.708647] change 400550 page nx
+[  487.708650] change 400558 page nx
+[  487.708653] change 400560 page nx
+[  487.708656] change 400568 page nx
+[  487.708659] change 400570 page nx
+[  487.708662] change 400578 page nx
+[  487.708665] change 400580 page nx
+[  487.708668] change 400588 page nx
+[  487.708671] change 400590 page nx
+[  487.708674] change 400598 page nx
+[  487.708677] change 4005a0 page nx
+[  487.708680] change 4005a8 page nx
+[  487.708683] change 4005b0 page nx
+[  487.708686] change 4005b8 page nx
+[  487.708689] change 4005c0 page nx
+[  487.708692] change 4005c8 page nx
+[  487.708695] change 4005d0 page nx
+[  487.708698] change 4005d8 page nx
+[  487.708701] change 4005e0 page nx
+[  487.708704] change 4005e8 page nx
+[  487.708707] change 4005f0 page nx
+[  487.708710] change 4005f8 page nx
+[  487.708713] change 400600 page nx
+[  487.708716] change 400608 page nx
+[  487.708719] change 400610 page nx
+[  487.708722] change 400618 page nx
+[  487.708725] change 400620 page nx
+[  487.708728] change 400628 page nx
+[  487.708731] change 400630 page nx
+[  487.708734] change 400638 page nx
+[  487.708737] change 400640 page nx
+[  487.708740] change 400648 page nx
+[  487.708743] change 400650 page nx
+[  487.708746] change 400658 page nx
+[  487.708749] change 400660 page nx
+[  487.708752] change 400668 page nx
+[  487.708755] change 400670 page nx
+[  487.708758] change 400678 page nx
+[  487.708761] change 400680 page nx
+[  487.708764] change 400688 page nx
+[  487.708767] change 400690 page nx
+[  487.708770] change 400698 page nx
+[  487.708773] change 4006a0 page nx
+[  487.708776] change 4006a8 page nx
+[  487.708779] change 4006b0 page nx
+[  487.708782] change 4006b8 page nx
+[  487.708786] change 4006c0 page nx
+[  487.708789] change 4006c8 page nx
+[  487.708792] change 4006d0 page nx
+[  487.708795] change 4006d8 page nx
+[  487.708798] change 4006e0 page nx
+[  487.708801] change 4006e8 page nx
+[  487.708804] change 4006f0 page nx
+[  487.708807] change 4006f8 page nx
+[  487.708810] change 400700 page nx
+[  487.708813] change 400708 page nx
+[  487.708816] change 400710 page nx
+[  487.708819] change 400718 page nx
+[  487.708822] change 400720 page nx
+[  487.708825] change 400728 page nx
+[  487.708828] change 400730 page nx
+[  487.708831] change 400738 page nx
+[  487.708834] change 400740 page nx
+[  487.708837] change 400748 page nx
+[  487.708840] change 400750 page nx
+[  487.708843] change 400758 page nx
+[  487.708846] change 400760 page nx
+[  487.708849] change 400768 page nx
+[  487.708852] change 400770 page nx
+[  487.708855] change 400778 page nx
+[  487.708858] change 400780 page nx
+[  487.708861] change 400788 page nx
+[  487.708864] change 400790 page nx
+[  487.708867] change 400798 page nx
+[  487.708870] change 4007a0 page nx
+[  487.708873] change 4007a8 page nx
+[  487.708876] change 4007b0 page nx
+[  487.708879] change 4007b8 page nx
+[  487.708882] change 4007c0 page nx
+[  487.708882] make all pages nx, test
+[  488.309835] armor-module is being opened
+[  488.309843] Got a PLT - GOT table:
+[  488.309844] 0000000000400410: 00007f7bbcda0400
+[  488.309845] 0000000000400420: 00007f7bbe3a54fe
+[  488.309846] 0000000000400430:           (null)
+[  488.309851] Got a exit points table
+[  488.309869] Copying PLT-GOT meta data
+[  488.309884] Copying PLT data
+[  488.309885] Copying GOT data
+[  488.309892] Waiting for exit points to become ready...
+[  488.309892] Copying simples
+[  488.309894] Copying exitpoints
+[  488.309898] A:3:0: GET_JIT - JIT analyzer is waiting for work now
+[  556.682226] A:2:0: BYE BYE! - do_exit for task @ 0xffff8800d38d3ae0
+[  556.682351] A:2:0: EXIT. locking lib mutex
+[  556.682366] A:2:0: EXIT. locking cbk mutex
+[  556.682368] A:2:0: EXIT. locking sig mutex
+[  556.682370] A:2:0: EXIT done
+[  563.906690] A:3:0: GET_JIT: INTERRUPTED!
+[  563.906801] di-opt[4438]: segfault at 62fdc20 ip 00007fe4d30a161d sp 00007ffc350bd2d8 error 6 in libc-2.19.so[7fe4d3015000+1bb000]
+[  563.907221] Some statistics:
+[  563.907223] Signal handlers entered: 0
+[  563.907224] Signal returns:          0
+[  563.907224] Library calls:    5920768
+[  563.907225] Library returns:  5920768
+[  563.907226] Callback calls:   0
+[  563.907226] Callback returns: 0
+[  563.907227] 
+[  563.907227] Number of newly created tasks: 0
+[  563.907228] Number of exited tasks:        1
+[  563.907228] 
+[  563.907229] System calls to execve:    0
+[  563.907229] System calls to read:    0
+[  563.907230] System calls to write:    0
+[  563.907231] System calls to mmap:      0     (only PROT_EXEC: 0)
+[  563.907232] System calls to mprotect:  0     (only PROT_EXEC: 0)
+[  563.907232] System calls to sigaction: 0
+[  563.907233] System calls total:        0
+[  563.907233] 
+[  563.907234] Context switches (sched-out): 10217594
+[  563.907234] Context switches (sched-in):  10217594
+[  563.907235] 
+[  563.907235] Number of digests computed: 0
+[  563.907236] LBR JIT lookups:     0
+[  563.907236] LBR JIT cache hits:  0
+[  563.907237] LBR JIT hits:        0
+[  563.907238] LBR JIT misses:      0
+[  563.907238] LBR JIT unsupported: 0
+[  563.907239] LBR JIT timeouts:    0
+[  563.907239] LBR JIT sec:         0
+[  563.907240] LBR JIT usec:        0
+[  563.907240] armor-module is now closed
+[ 1079.520241] jmp_src @ ffffffff810842e0:
+[ 1079.520244] 90 90 90 90 90 55 48 89 e5 53 48 83 ec 18 85 ff 
+[ 1079.520248] [intercept.c] inserting relative jump ffffffff810842e0 --> ffffffffc0c429bf
+[ 1079.520250] jmp_src @ ffffffff810842e0:
+[ 1079.520251] e9 da e6 bb 3f 55 48 89 e5 53 48 83 ec 18 85 ff 
+[ 1079.520254] jmp_back_src @ ffffffffc0c429d5:
+[ 1079.520255] 90 90 90 90 90 48 83 f8 09 74 2f 48 83 f8 0a 0f 
+[ 1079.520259] [intercept.c] inserting relative jump ffffffffc0c429d5 --> ffffffff810842e5
+[ 1079.520260] jmp_back_src @ ffffffffc0c429d5:
+[ 1079.520260] e9 0b 19 44 c0 48 83 f8 09 74 2f 48 83 f8 0a 0f 
+[ 1079.534090] page fault: addr_dft_page_fault=0xffffffff817b87c0
+[ 1079.534092] page fault: addr_dft_do_page_fault=0xffffffff81062280
+[ 1079.534092] page fault: addr_pv_irq_ops=0xffffffff81c31ac0
+[ 1079.534093] page fault: addr_error_entry=0xffffffff817b8980
+[ 1079.534094] page fault: addr_error_exit=0xffffffff817b8a30
+[ 1079.534094] page fault handler: alloc a page to store new idt table.
+[ 1079.534419] page fault handler: load the new idt table.
+[ 1079.534419] page fault handler: new idt table loaded.
+[ 1079.534440] page fault handler: all CPUs have loaded the new idt table.
+[ 1079.534441] Armor module initialized
+[ 1084.478104] armor-module is being opened
+[ 1084.478113] Waiting for target to start...
+[ 1098.954163] armor-module is being opened
+[ 1098.954170] A:2:0: ARMOR_COPY
+[ 1098.954176] Getting offsets
+[ 1098.954176] A:2:0: ARMOR_INIT
+[ 1098.954188] Copying to user
+[ 1098.954218] Waiting for library instrumentation to finish...
+[ 1098.954304] A:3:0: Enabling LBR
+[ 1098.954319] A:1:0: Enabling LBR
+[ 1098.954321] A:0:0: Enabling LBR
+[ 1098.954326] A:2:0: Enabling LBR
+[ 1098.954332] A:2:0: ARMOR_INIT, start: 400000
+[ 1098.954333] A:2:0: ARMOR_INIT, end  : 400a2c
+[ 1098.954334] A:2:0: copied!
+[ 1098.954412] change 400000 page nx
+[ 1098.954416] change 400008 page nx
+[ 1098.954419] change 400010 page nx
+[ 1098.954431] change 400018 page nx
+[ 1098.954434] change 400020 page nx
+[ 1098.954438] change 400028 page nx
+[ 1098.954450] change 400030 page nx
+[ 1098.954453] change 400038 page nx
+[ 1098.954456] change 400040 page nx
+[ 1098.954459] change 400048 page nx
+[ 1098.954472] change 400050 page nx
+[ 1098.954475] change 400058 page nx
+[ 1098.954478] change 400060 page nx
+[ 1098.954481] change 400068 page nx
+[ 1098.954485] change 400070 page nx
+[ 1098.954488] change 400078 page nx
+[ 1098.954491] change 400080 page nx
+[ 1098.954494] change 400088 page nx
+[ 1098.954497] change 400090 page nx
+[ 1098.954500] change 400098 page nx
+[ 1098.954512] change 4000a0 page nx
+[ 1098.954515] change 4000a8 page nx
+[ 1098.954518] change 4000b0 page nx
+[ 1098.954521] change 4000b8 page nx
+[ 1098.954524] change 4000c0 page nx
+[ 1098.954527] change 4000c8 page nx
+[ 1098.954530] change 4000d0 page nx
+[ 1098.954533] change 4000d8 page nx
+[ 1098.954536] change 4000e0 page nx
+[ 1098.954540] change 4000e8 page nx
+[ 1098.954543] change 4000f0 page nx
+[ 1098.954546] change 4000f8 page nx
+[ 1098.954549] change 400100 page nx
+[ 1098.954552] change 400108 page nx
+[ 1098.954555] change 400110 page nx
+[ 1098.954558] change 400118 page nx
+[ 1098.954561] change 400120 page nx
+[ 1098.954564] change 400128 page nx
+[ 1098.954567] change 400130 page nx
+[ 1098.954570] change 400138 page nx
+[ 1098.954573] change 400140 page nx
+[ 1098.954576] change 400148 page nx
+[ 1098.954579] change 400150 page nx
+[ 1098.954582] change 400158 page nx
+[ 1098.954585] change 400160 page nx
+[ 1098.954588] change 400168 page nx
+[ 1098.954591] change 400170 page nx
+[ 1098.954594] change 400178 page nx
+[ 1098.954597] change 400180 page nx
+[ 1098.954600] change 400188 page nx
+[ 1098.954603] change 400190 page nx
+[ 1098.954606] change 400198 page nx
+[ 1098.954610] change 4001a0 page nx
+[ 1098.954613] change 4001a8 page nx
+[ 1098.954616] change 4001b0 page nx
+[ 1098.954619] change 4001b8 page nx
+[ 1098.954622] change 4001c0 page nx
+[ 1098.954625] change 4001c8 page nx
+[ 1098.954628] change 4001d0 page nx
+[ 1098.954631] change 4001d8 page nx
+[ 1098.954634] change 4001e0 page nx
+[ 1098.954637] change 4001e8 page nx
+[ 1098.954640] change 4001f0 page nx
+[ 1098.954643] change 4001f8 page nx
+[ 1098.954646] change 400200 page nx
+[ 1098.954657] change 400208 page nx
+[ 1098.954660] change 400210 page nx
+[ 1098.954664] change 400218 page nx
+[ 1098.954667] change 400220 page nx
+[ 1098.954670] change 400228 page nx
+[ 1098.954673] change 400230 page nx
+[ 1098.954677] change 400238 page nx
+[ 1098.954680] change 400240 page nx
+[ 1098.954683] change 400248 page nx
+[ 1098.954686] change 400250 page nx
+[ 1098.954690] change 400258 page nx
+[ 1098.954693] change 400260 page nx
+[ 1098.954696] change 400268 page nx
+[ 1098.954699] change 400270 page nx
+[ 1098.954703] change 400278 page nx
+[ 1098.954706] change 400280 page nx
+[ 1098.954709] change 400288 page nx
+[ 1098.954712] change 400290 page nx
+[ 1098.954716] change 400298 page nx
+[ 1098.954719] change 4002a0 page nx
+[ 1098.954722] change 4002a8 page nx
+[ 1098.954725] change 4002b0 page nx
+[ 1098.954729] change 4002b8 page nx
+[ 1098.954732] change 4002c0 page nx
+[ 1098.954735] change 4002c8 page nx
+[ 1098.954738] change 4002d0 page nx
+[ 1098.954742] change 4002d8 page nx
+[ 1098.954745] change 4002e0 page nx
+[ 1098.954748] change 4002e8 page nx
+[ 1098.954751] change 4002f0 page nx
+[ 1098.954754] change 4002f8 page nx
+[ 1098.954758] change 400300 page nx
+[ 1098.954761] change 400308 page nx
+[ 1098.954764] change 400310 page nx
+[ 1098.954767] change 400318 page nx
+[ 1098.954771] change 400320 page nx
+[ 1098.954774] change 400328 page nx
+[ 1098.954777] change 400330 page nx
+[ 1098.954780] change 400338 page nx
+[ 1098.954784] change 400340 page nx
+[ 1098.954787] change 400348 page nx
+[ 1098.954790] change 400350 page nx
+[ 1098.954793] change 400358 page nx
+[ 1098.954797] change 400360 page nx
+[ 1098.954800] change 400368 page nx
+[ 1098.954803] change 400370 page nx
+[ 1098.954806] change 400378 page nx
+[ 1098.954810] change 400380 page nx
+[ 1098.954813] change 400388 page nx
+[ 1098.954816] change 400390 page nx
+[ 1098.954819] change 400398 page nx
+[ 1098.954822] change 4003a0 page nx
+[ 1098.954826] change 4003a8 page nx
+[ 1098.954829] change 4003b0 page nx
+[ 1098.954832] change 4003b8 page nx
+[ 1098.954835] change 4003c0 page nx
+[ 1098.954839] change 4003c8 page nx
+[ 1098.954842] change 4003d0 page nx
+[ 1098.954845] change 4003d8 page nx
+[ 1098.954848] change 4003e0 page nx
+[ 1098.954852] change 4003e8 page nx
+[ 1098.954855] change 4003f0 page nx
+[ 1098.954858] change 4003f8 page nx
+[ 1098.954861] change 400400 page nx
+[ 1098.954865] change 400408 page nx
+[ 1098.954868] change 400410 page nx
+[ 1098.954871] change 400418 page nx
+[ 1098.954874] change 400420 page nx
+[ 1098.954878] change 400428 page nx
+[ 1098.954881] change 400430 page nx
+[ 1098.954884] change 400438 page nx
+[ 1098.954887] change 400440 page nx
+[ 1098.954890] change 400448 page nx
+[ 1098.954894] change 400450 page nx
+[ 1098.954897] change 400458 page nx
+[ 1098.954900] change 400460 page nx
+[ 1098.954903] change 400468 page nx
+[ 1098.954907] change 400470 page nx
+[ 1098.954910] change 400478 page nx
+[ 1098.954913] change 400480 page nx
+[ 1098.954916] change 400488 page nx
+[ 1098.954920] change 400490 page nx
+[ 1098.954923] change 400498 page nx
+[ 1098.954926] change 4004a0 page nx
+[ 1098.954929] change 4004a8 page nx
+[ 1098.954933] change 4004b0 page nx
+[ 1098.954936] change 4004b8 page nx
+[ 1098.954939] change 4004c0 page nx
+[ 1098.954942] change 4004c8 page nx
+[ 1098.954946] change 4004d0 page nx
+[ 1098.954949] change 4004d8 page nx
+[ 1098.954952] change 4004e0 page nx
+[ 1098.954955] change 4004e8 page nx
+[ 1098.954959] change 4004f0 page nx
+[ 1098.954962] change 4004f8 page nx
+[ 1098.954965] change 400500 page nx
+[ 1098.954968] change 400508 page nx
+[ 1098.954972] change 400510 page nx
+[ 1098.954975] change 400518 page nx
+[ 1098.954978] change 400520 page nx
+[ 1098.954981] change 400528 page nx
+[ 1098.954984] change 400530 page nx
+[ 1098.954988] change 400538 page nx
+[ 1098.954991] change 400540 page nx
+[ 1098.954994] change 400548 page nx
+[ 1098.954997] change 400550 page nx
+[ 1098.955001] change 400558 page nx
+[ 1098.955004] change 400560 page nx
+[ 1098.955007] change 400568 page nx
+[ 1098.955010] change 400570 page nx
+[ 1098.955014] change 400578 page nx
+[ 1098.955017] change 400580 page nx
+[ 1098.955020] change 400588 page nx
+[ 1098.955023] change 400590 page nx
+[ 1098.955027] change 400598 page nx
+[ 1098.955030] change 4005a0 page nx
+[ 1098.955033] change 4005a8 page nx
+[ 1098.955036] change 4005b0 page nx
+[ 1098.955040] change 4005b8 page nx
+[ 1098.955043] change 4005c0 page nx
+[ 1098.955046] change 4005c8 page nx
+[ 1098.955049] change 4005d0 page nx
+[ 1098.955053] change 4005d8 page nx
+[ 1098.955056] change 4005e0 page nx
+[ 1098.955059] change 4005e8 page nx
+[ 1098.955062] change 4005f0 page nx
+[ 1098.955066] change 4005f8 page nx
+[ 1098.955069] change 400600 page nx
+[ 1098.955072] change 400608 page nx
+[ 1098.955075] change 400610 page nx
+[ 1098.955079] change 400618 page nx
+[ 1098.955082] change 400620 page nx
+[ 1098.955085] change 400628 page nx
+[ 1098.955088] change 400630 page nx
+[ 1098.955092] change 400638 page nx
+[ 1098.955095] change 400640 page nx
+[ 1098.955098] change 400648 page nx
+[ 1098.955101] change 400650 page nx
+[ 1098.955104] change 400658 page nx
+[ 1098.955108] change 400660 page nx
+[ 1098.955111] change 400668 page nx
+[ 1098.955114] change 400670 page nx
+[ 1098.955117] change 400678 page nx
+[ 1098.955121] change 400680 page nx
+[ 1098.955124] change 400688 page nx
+[ 1098.955127] change 400690 page nx
+[ 1098.955130] change 400698 page nx
+[ 1098.955134] change 4006a0 page nx
+[ 1098.955137] change 4006a8 page nx
+[ 1098.955140] change 4006b0 page nx
+[ 1098.955143] change 4006b8 page nx
+[ 1098.955146] change 4006c0 page nx
+[ 1098.955150] change 4006c8 page nx
+[ 1098.955153] change 4006d0 page nx
+[ 1098.955156] change 4006d8 page nx
+[ 1098.955159] change 4006e0 page nx
+[ 1098.955163] change 4006e8 page nx
+[ 1098.955166] change 4006f0 page nx
+[ 1098.955169] change 4006f8 page nx
+[ 1098.955172] change 400700 page nx
+[ 1098.955176] change 400708 page nx
+[ 1098.955179] change 400710 page nx
+[ 1098.955182] change 400718 page nx
+[ 1098.955185] change 400720 page nx
+[ 1098.955189] change 400728 page nx
+[ 1098.955192] change 400730 page nx
+[ 1098.955195] change 400738 page nx
+[ 1098.955198] change 400740 page nx
+[ 1098.955201] change 400748 page nx
+[ 1098.955205] change 400750 page nx
+[ 1098.955208] change 400758 page nx
+[ 1098.955211] change 400760 page nx
+[ 1098.955214] change 400768 page nx
+[ 1098.955218] change 400770 page nx
+[ 1098.955221] change 400778 page nx
+[ 1098.955224] change 400780 page nx
+[ 1098.955227] change 400788 page nx
+[ 1098.955231] change 400790 page nx
+[ 1098.955234] change 400798 page nx
+[ 1098.955237] change 4007a0 page nx
+[ 1098.955240] change 4007a8 page nx
+[ 1098.955244] change 4007b0 page nx
+[ 1098.955247] change 4007b8 page nx
+[ 1098.955250] change 4007c0 page nx
+[ 1098.955253] change 4007c8 page nx
+[ 1098.955257] change 4007d0 page nx
+[ 1098.955260] change 4007d8 page nx
+[ 1098.955263] change 4007e0 page nx
+[ 1098.955266] change 4007e8 page nx
+[ 1098.955270] change 4007f0 page nx
+[ 1098.955273] change 4007f8 page nx
+[ 1098.955276] change 400800 page nx
+[ 1098.955279] change 400808 page nx
+[ 1098.955282] change 400810 page nx
+[ 1098.955286] change 400818 page nx
+[ 1098.955289] change 400820 page nx
+[ 1098.955292] change 400828 page nx
+[ 1098.955295] change 400830 page nx
+[ 1098.955299] change 400838 page nx
+[ 1098.955302] change 400840 page nx
+[ 1098.955305] change 400848 page nx
+[ 1098.955308] change 400850 page nx
+[ 1098.955312] change 400858 page nx
+[ 1098.955315] change 400860 page nx
+[ 1098.955318] change 400868 page nx
+[ 1098.955321] change 400870 page nx
+[ 1098.955325] change 400878 page nx
+[ 1098.955328] change 400880 page nx
+[ 1098.955331] change 400888 page nx
+[ 1098.955334] change 400890 page nx
+[ 1098.955337] change 400898 page nx
+[ 1098.955341] change 4008a0 page nx
+[ 1098.955344] change 4008a8 page nx
+[ 1098.955347] change 4008b0 page nx
+[ 1098.955350] change 4008b8 page nx
+[ 1098.955354] change 4008c0 page nx
+[ 1098.955357] change 4008c8 page nx
+[ 1098.955360] change 4008d0 page nx
+[ 1098.955363] change 4008d8 page nx
+[ 1098.955367] change 4008e0 page nx
+[ 1098.955370] change 4008e8 page nx
+[ 1098.955373] change 4008f0 page nx
+[ 1098.955377] change 4008f8 page nx
+[ 1098.955380] change 400900 page nx
+[ 1098.955383] change 400908 page nx
+[ 1098.955386] change 400910 page nx
+[ 1098.955389] change 400918 page nx
+[ 1098.955393] change 400920 page nx
+[ 1098.955396] change 400928 page nx
+[ 1098.955399] change 400930 page nx
+[ 1098.955402] change 400938 page nx
+[ 1098.955406] change 400940 page nx
+[ 1098.955409] change 400948 page nx
+[ 1098.955412] change 400950 page nx
+[ 1098.955415] change 400958 page nx
+[ 1098.955419] change 400960 page nx
+[ 1098.955422] change 400968 page nx
+[ 1098.955425] change 400970 page nx
+[ 1098.955428] change 400978 page nx
+[ 1098.955432] change 400980 page nx
+[ 1098.955435] change 400988 page nx
+[ 1098.955438] change 400990 page nx
+[ 1098.955441] change 400998 page nx
+[ 1098.955444] change 4009a0 page nx
+[ 1098.955448] change 4009a8 page nx
+[ 1098.955451] change 4009b0 page nx
+[ 1098.955454] change 4009b8 page nx
+[ 1098.955457] change 4009c0 page nx
+[ 1098.955461] change 4009c8 page nx
+[ 1098.955464] change 4009d0 page nx
+[ 1098.955467] change 4009d8 page nx
+[ 1098.955470] change 4009e0 page nx
+[ 1098.955474] change 4009e8 page nx
+[ 1098.955477] change 4009f0 page nx
+[ 1098.955480] change 4009f8 page nx
+[ 1098.955483] change 400a00 page nx
+[ 1098.955487] change 400a08 page nx
+[ 1098.955490] change 400a10 page nx
+[ 1098.955493] change 400a18 page nx
+[ 1098.955496] change 400a20 page nx
+[ 1098.955499] change 400a28 page nx
+[ 1098.955500] make all pages nx, hahah
+[ 1099.572257] armor-module is being opened
+[ 1099.572265] Got a PLT - GOT table:
+[ 1099.572267] 8000000000400570: 80007f5de1dcbdf0
+[ 1099.572268] 0000000000400580: 00007f5de1e34860
+[ 1099.572268] 0000000000400590: 00007f5de1db6990
+[ 1099.572269] 00000000004005a0: 00007f5de1d9d400
+[ 1099.572269] 00000000004005b0: 00007f5de1dd55c0
+[ 1099.572270] 00000000004005c0: 00007f5de33a24fe
+[ 1099.572271] 00000000004005d0:           (null)
+[ 1099.572271] 00000000004005e0: 00007f5de1dcb750
+[ 1099.572272] 00000000004005f0: 00007f5de1db74e0
+[ 1099.572277] Copying PLT-GOT meta data
+[ 1099.572278] Got a exit points table
+[ 1099.572279] 00007f5de1dd55fa
+[ 1099.572280] 00007f5de1dd560d
+[ 1099.572280] 00007f5de1dd5680
+[ 1099.572281] 00007f5de1dd56a6
+[ 1099.572282] 00007f5de1dd56ad
+[ 1099.572282] 00007f5de1dd56b6
+[ 1099.572294] Copying PLT data
+[ 1099.572296] Copying GOT data
+[ 1099.572306] Waiting for exit points to become ready...
+[ 1099.572307] Copying simples
+[ 1099.572309] Copying exitpoints
+[ 1099.572316] A:3:0: GET_JIT - JIT analyzer is waiting for work now
+[ 1101.081482] A:3:0: BYE BYE! - do_exit for task @ 0xffff8801d84fc4b0
+[ 1101.081487] A:3:0: EXIT. locking lib mutex
+[ 1101.081490] A:3:0: EXIT. locking cbk mutex
+[ 1101.081492] A:3:0: EXIT. locking sig mutex
+[ 1101.081494] A:3:0: EXIT done

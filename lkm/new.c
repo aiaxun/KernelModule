@@ -30,11 +30,12 @@
 // slide window contains current x pages
 // should be update when do_page_fault
 // use kfifo object
+/*
 static pte_t *slide_cache[SLIDE_SIZE];
 static int start_pos = -1;
 static int end_pos = -1;
 static int cur_pos = -1;
-
+*/
 
 
 static unsigned long new_idt_table_page;
@@ -86,9 +87,15 @@ typedef void (*do_page_fault_t)(struct pt_regs*, unsigned long);
 
 void my_do_page_fault(struct pt_regs* regs, unsigned long error_code){
     if (tst_task_lbr(current)) {
-        printk(KERN_INFO "page fault %lu %s.\n", (unsigned long)current->pid, current->comm);
+        printk(KERN_INFO "page fault %lu %s. ", (unsigned long)current->pid, current->comm);
         unsigned long address = read_cr2();
+        if (address >= current->mm->start_code && address <= current->mm->end_code) {
+            printk("this is triggered by module @%lx\n",address);
+            validate_lbr();
+            printk("validate when page fault %lu\n", counter++);
+        }
         unsigned long level;
+        
         pte_t *pte = lookup_address(address, &level);
         if (pte) {
             printk("validate when page falut\t");

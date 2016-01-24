@@ -12,7 +12,7 @@
 #include <linux/uaccess.h>
 #include <linux/workqueue.h>
 #include <linux/sysctl.h>
-
+#include <asm/cacheflush.h>
 #include <linux/spinlock.h>
 #include <linux/spinlock_types.h>
 
@@ -1164,11 +1164,11 @@ static long armor_ioctl(struct file *file, unsigned int cmd, unsigned long arg1)
             ret = copy_to_user((void __user *)arg1, code, sizeof(code));
             printd(true,"copied!\n");
             /* make every exec page in the address space nx*/
-            //mark_all_pages_nx(current);
-            make_nx(code[0]);
-            make_nx(code[1]);
-            make_x(code[0]);
-            make_x(code[1]);
+            mark_all_pages_nx(current);
+            //down_write(&current->mm->mmap_sem);
+            //set_memory_nx(code[0],1);
+            //make_nx(code[0]);
+            //up_write(&current->mm->mmap_sem);
             return ret;
 
 /******** HELPER IOCTLS */

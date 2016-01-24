@@ -1,3 +1,10 @@
+/*************************************************************************
+	> File Name: new.c
+	> Author: 
+	> Mail: 
+	> Created Time: 2016年01月22日 星期五 19时25分04秒
+ ************************************************************************/
+
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/errno.h>
@@ -10,13 +17,25 @@
 #include <linux/moduleparam.h>
 #include <linux/kallsyms.h>
 
-#include "handle_page_fault.h"
+#include "new.h"
+#include "lbr.h"
+
+#define SLIDE_SIZE 2
 //PGFAULT_NR is the interrupt number of page fault. It is platform specific.
 #if defined(CONFIG_X86_64)
 #define PGFAULT_NR X86_TRAP_PF
 #else
 #error This module is only for X86_64 kernel
 #endif
+// slide window contains current x pages
+// should be update when do_page_fault
+// use kfifo object
+static pte_t *slide_cache[SLIDE_SIZE];
+static int start_pos = -1;
+static int end_pos = -1;
+static int cur_pos = -1;
+
+
 
 static unsigned long new_idt_table_page;
 static struct desc_ptr default_idtr;
@@ -28,6 +47,7 @@ static unsigned long addr_pv_irq_ops = 0UL; //address of 'pv_irq_ops'
 static unsigned long addr_adjust_exception_frame; //content of pv_irq_ops.adjust_exception_frame, it's a function
 static unsigned long addr_error_entry = 0UL;
 static unsigned long addr_error_exit = 0UL;
+static unsigned long counter = 0UL;
 /*
 module_param(addr_dft_page_fault, ulong, S_IRUGO);
 module_param(addr_dft_do_page_fault, ulong, S_IRUGO);
@@ -46,10 +66,10 @@ static int set_parameters(void) {
 
 #define CHECK_PARAM(x) do{\
     if(!x){\
-        printk(KERN_INFO "my_virt_drv: Error: need to set '%s'\n", #x);\
+        printk(KERN_INFO "page fault: Error: need to set '%s'\n", #x);\
         is_any_unset = 1;\
     }\
-    printk(KERN_INFO "my_virt_drv: %s=0x%lx\n", #x, x);\
+    printk(KERN_INFO "page fault: %s=0x%lx\n", #x, x);\
 }while(0)
 
 static int check_parameters(void){
@@ -65,9 +85,23 @@ static int check_parameters(void){
 typedef void (*do_page_fault_t)(struct pt_regs*, unsigned long);
 
 void my_do_page_fault(struct pt_regs* regs, unsigned long error_code){
-    struct task_struct * task = current;
-    printk(KERN_INFO "page fault detected in process %lu.\n", (unsigned long)task->pid);
-
+    if (tst_task_lbr(current)) {
+        printk(KERN_INFO "page fault %lu %s.\n", (unsigned long)current->pid, current->comm);
+        unsigned long address = read_cr2();
+        unsigned long level;
+        pte_t *pte = lookup_address(address, &level);
+        if (pte) {
+            printk("validate when page falut\t");
+            if (pte->pte & _PAGE_NX ) {
+                printk("page fault validate, %lu\t", counter++);
+                validate_lbr();
+                mark_all_pages_nx(current); 
+                mark_the_page_x(current, address);
+                return ;
+            }
+            return;
+        }
+    }
     ((do_page_fault_t)addr_dft_do_page_fault)(regs, error_code);
 }
 
@@ -167,12 +201,4 @@ void unregister_new_page_fault_handler(void){
     }
 }
 
-int register_new_page_fault(void) 
-{
-    return register_new_page_fault_handler();
-}
-
-void unregister_new_page_fault(void) {
-    unregister_new_page_fault_handler();
-}
 MODULE_LICENSE("Dual BSD/GPL");

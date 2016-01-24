@@ -1,0 +1,1 @@
+cmd_/home/kylin/Modules/KernelModule/trigger.o := ld -m elf_x86_64   -r -o /home/kylin/Modules/KernelModule/trigger.o /home/kylin/Modules/KernelModule/mark_page_nx.o /home/kylin/Modules/KernelModule/handle_page_fault.o 

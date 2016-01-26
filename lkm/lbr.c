@@ -335,7 +335,7 @@ void validate_lbr(void) {
     struct lbr_t lbr;
     struct timeval time;
     unsigned long jit_start_j, jit_stop_j, jit_delta_j;
-    printk("validate lbr state %lu\n",total_count++); 
+    printk("total validate lbr state %ld\n",total_count++); 
 
     get_cpu();
     get_lbr(&lbr);

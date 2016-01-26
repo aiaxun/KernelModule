@@ -11,6 +11,12 @@
 
 int register_new_page_fault_handler(void);
 void unregister_new_page_fault_handler(void);
+/*****************************
+int register_new_signal_handler(void);
+int unregister_new_signal_handler(void);
+***********************************/
+
+pte_t *get_pte(unsigned long address);
 
 int mark_the_page_nx(struct task_struct *task, unsigned long addr);
 int mark_the_page_x(struct task_struct *task, unsigned long addr);

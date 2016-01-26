@@ -18,6 +18,16 @@
 #include "new.h"
 #include "lbr.h"
 
+pte_t *get_pte(unsigned long address) 
+{
+    struct mm_struct *mm=current->mm;
+    pgd_t *pgd = pgd_offset(mm,address);
+    pud_t *pud = pud_offset(pgd,address);
+    pmd_t *pmd = pmd_offset(pud,address);
+    pte_t *pte = pte_offset_kernel(pmd,address);
+    return pte;
+
+}
 int make_nx(unsigned long address) {
     /*
     unsigned int level;
@@ -28,9 +38,14 @@ int make_nx(unsigned long address) {
     } else {
         printk("do not find user page\n");
     }*/
+    /*
     int pagenums = 1;
     set_memory_nx(address, pagenums);
-    printk("change %lx page nx\n",address);
+    printk("change %lx page nx\n",address);*/
+    pte_t *pte = get_pte(address);
+    if (pte_exec(*pte)!=0) {
+        pte_set_flags(*pte, _PAGE_NX);
+    }
     return 0;
 }
 int make_x(unsigned long address) {
@@ -42,10 +57,15 @@ int make_x(unsigned long address) {
         printk("this page is marked x\n");
     } else {
         printk("don't find user page\n");
-    }*/
+    }
     int pagenums = 1;
     set_memory_x(address, pagenums);
-    printk("chagne %lx page exec\n",address);
+    printk("chagne %lx page exec\n",address); */
+    pte_t *pte = get_pte(address);
+    if (!pte_write(*pte)) {
+        pte_mkexec(*pte);
+        printk("make this page exec 0x%lx",address);
+    }
     return 0;
 }
 int mark_the_page_nx(struct task_struct *task, unsigned long addr)
@@ -71,10 +91,24 @@ int mark_all_pages_nx(struct task_struct *task)
         goto out;
     }
     down_read(&task->mm->mmap_sem);
-    for (addr = start_code; addr <= end_code;)
+    //set_memory_nx(start_code, (end_code-start_code) >> PAGE_SHIFT);
+    /*for (addr = start_code; addr <= end_code;)
     {
         make_nx(addr);
         addr += 8;
+    }*/
+    pte_t *old_pte;
+    pte_t *now_pte;
+    old_pte = get_pte(start_code);
+    make_nx(start_code);
+    for (addr = start_code;addr <= end_code; )
+    {
+        now_pte = get_pte(addr);
+        if (now_pte != old_pte) {
+            make_nx(addr);
+            old_pte = now_pte;
+        } 
+        addr += 4;
     }
     printk("make all pages nx, %s\n", task->comm);
     up_read(&task->mm->mmap_sem);

@@ -16,6 +16,7 @@
 #include <linux/sched.h>
 #include <linux/moduleparam.h>
 #include <linux/kallsyms.h>
+#include <linux/kprobes.h>
 
 #include "new.h"
 #include "lbr.h"
@@ -37,7 +38,6 @@ static int end_pos = -1;
 static int cur_pos = -1;
 */
 
-
 static unsigned long new_idt_table_page;
 static struct desc_ptr default_idtr;
 
@@ -48,7 +48,7 @@ static unsigned long addr_pv_irq_ops = 0UL; //address of 'pv_irq_ops'
 static unsigned long addr_adjust_exception_frame; //content of pv_irq_ops.adjust_exception_frame, it's a function
 static unsigned long addr_error_entry = 0UL;
 static unsigned long addr_error_exit = 0UL;
-static unsigned long counter = 0UL;
+unsigned long counter = 0UL;
 /*
 module_param(addr_dft_page_fault, ulong, S_IRUGO);
 module_param(addr_dft_do_page_fault, ulong, S_IRUGO);
@@ -56,6 +56,11 @@ module_param(addr_pv_irq_ops, ulong, S_IRUGO);
 module_param(addr_error_entry, ulong, S_IRUGO);
 module_param(addr_error_exit, ulong, S_IRUGO);
 */
+
+/**/
+
+
+/**/
 static int set_parameters(void) {
     addr_dft_page_fault = kallsyms_lookup_name("page_fault");
     addr_dft_do_page_fault = kallsyms_lookup_name("do_page_fault");
@@ -86,27 +91,20 @@ static int check_parameters(void){
 typedef void (*do_page_fault_t)(struct pt_regs*, unsigned long);
 
 void my_do_page_fault(struct pt_regs* regs, unsigned long error_code){
+    unsigned long address = read_cr2();
+    pte_t *pte = get_pte(address);
     if (tst_task_lbr(current)) {
-        printk(KERN_INFO "page fault %lu %s. ", (unsigned long)current->pid, current->comm);
-        unsigned long address = read_cr2();
-        if (address >= current->mm->start_code && address <= current->mm->end_code) {
-            printk("this is triggered by module @%lx\n",address);
+        printk(KERN_INFO "page fault %lu %s. ", (unsigned long)current->pid, current->comm);        
+        /*
+         * here I think the page is in memory and marked nx
+         * */
+        if (pte_exec(*pte) && !pte_none(*pte) ) {
+            mark_all_pages_nx(current);
+            pte_mkexec(*pte);
+            printk("this pte is marked exec now, validate %d\n", counter++);
+            printk("******************new****************\n");
             validate_lbr();
-            printk("validate when page fault %lu\n", counter++);
-        }
-        unsigned long level;
-        
-        pte_t *pte = lookup_address(address, &level);
-        if (pte) {
-            printk("validate when page falut\t");
-            if (pte->pte & _PAGE_NX ) {
-                printk("page fault validate, %lu\t", counter++);
-                validate_lbr();
-                mark_all_pages_nx(current); 
-                mark_the_page_x(current, address);
-                return ;
-            }
-            return;
+            //return ;
         }
     }
     ((do_page_fault_t)addr_dft_do_page_fault)(regs, error_code);

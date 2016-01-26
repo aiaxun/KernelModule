@@ -250,10 +250,6 @@ struct armor_stats {
 
 
 
-
-
-
-
 /***** Function prototypes *****/
 
 /* Initialize the LBR cache (memset to 0) */
